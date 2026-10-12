@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Law Weekly — Subscribe</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+input,select,textarea,button{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #2F6FB0;outline-offset:2px}
+a{color:#1F4E8C}a:hover{color:#13233A}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F6F5F1; color: #172033; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; display: flex; flex-direction: column">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E2E5EB">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<button type="button" onClick="{{goShop}}" style="border: 0; background: none; padding: 0; cursor: pointer; text-align: left; color: #13233A">
+<span style="display: block; font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.01em">The Law Weekly</span>
+<span style="display: block; font-size: 12px; color: #5A6478; letter-spacing: 0.08em; text-transform: uppercase">Law reports · since [YEAR]</span>
+</button>
+<nav aria-label="Site" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap">
+<button type="button" onClick="{{goShop}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navShop}}">Journals &amp; plans</button>
+<button type="button" onClick="{{goAccount}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navAccount}}">My subscriptions</button>
+<button type="button" onClick="{{goCheckout}}" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; cursor: pointer">Cart · {{cartCount}}</button>
+</nav>
+</div>
+</header>
+
+<!-- ================= SHOP ================= -->
+<sc-if value="{{isShop}}" hint-placeholder-val="{{true}}">
+<section style="background: #13233A; color: #FFFFFF">
+<div style="max-width: 1200px; margin: 0 auto; padding: 56px 24px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
+<div style="flex: 1 1 520px; max-width: 680px; display: flex; flex-direction: column; gap: 16px">
+<div style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #E9B44C; font-weight: 600">Subscriptions 2026–27 now open</div>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 52px; line-height: 1.05; font-weight: 600; letter-spacing: -0.015em">Reported judgments, delivered to your chambers.</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #D3DAE5">Subscribe to The Law Weekly (Civil), Criminal Law and Writ Law online. Pay by UPI, card, net banking or cheque, and track every issue to your door.</p>
+</div>
+<div style="display: flex; gap: 28px; flex-wrap: wrap">
+<div><div style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">3</div><div style="font-size: 13px; color: #A9B4C6">journals</div></div>
+<div><div style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">Weekly</div><div style="font-size: 13px; color: #A9B4C6">civil reports</div></div>
+<div><div style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">Monthly</div><div style="font-size: 13px; color: #A9B4C6">criminal &amp; writ</div></div>
+</div>
+</div>
+</section>
+
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 40px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between">
+<div>
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 600">Choose your journals</h2>
+<p style="margin: 6px 0 0; color: #5A6478">Select one or more, set the number of copies, then pick your plan.</p>
+</div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">I am subscribing as
+<select value="{{ctype}}" onChange="{{setCtype}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; min-width: 220px">
+<option>Individual advocate</option><option>Law firm</option><option>Government / Court</option><option>Distribution agent</option>
+</select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Delivery
+<select value="{{delivery}}" onChange="{{setDelivery}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; min-width: 200px">
+<option>Local (Chennai)</option><option>Outstation</option>
+</select></label>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<sc-for list="{{journals}}" as="item" hint-placeholder-count="3">
+<article style="background: #FFFFFF; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 18px; {{item.cardStyle}}">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8A4B00">{{item.freq}}</span>
+<h3 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 600; line-height: 1.15">{{item.name}}</h3>
+</div>
+<span style="padding: 4px 9px; border-radius: 6px; background: #EEF2F8; color: #1F3A5F; font-size: 12px; font-weight: 600">{{item.code}}</span>
+</div>
+<p style="margin: 0; color: #4A5468; line-height: 1.55">{{item.blurb}}</p>
+<div style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">{{item.price}}</span><span style="color: #5A6478">per copy / year</span></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #EEF0F3">
+<div style="display: flex; align-items: center; gap: 4px" role="group" aria-label="Copies">
+<button type="button" onClick="{{item.dec}}" aria-label="Fewer copies" style="width: 44px; height: 44px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; font-size: 20px; cursor: pointer">−</button>
+<span style="min-width: 64px; text-align: center; font-weight: 600">{{item.copiesText}}</span>
+<button type="button" onClick="{{item.inc}}" aria-label="More copies" style="width: 44px; height: 44px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; font-size: 20px; cursor: pointer">+</button>
+</div>
+<button type="button" onClick="{{item.toggle}}" aria-pressed="{{item.pressed}}" style="min-height: 44px; padding: 0 18px; border-radius: 8px; cursor: pointer; font-weight: 600; {{item.btnStyle}}">{{item.btnLabel}}</button>
+</div>
+</article>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+<section style="flex: 1 1 420px; background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600">Plan length</h3>
+<div role="group" aria-label="Plan length" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{tenures}}" as="item" hint-placeholder-count="3">
+<button type="button" onClick="{{item.pick}}" style="min-height: 64px; padding: 10px; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; {{item.style}}">
+<span style="font-weight: 600">{{item.label}}</span><span style="font-size: 12px; color: #5A6478">{{item.sub}}</span>
+</button>
+</sc-for>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5A6478; line-height: 1.5">Judges' and court complimentary copies are allotted by the publisher and are not sold online. Agents: your commission is applied on the invoice after approval.</p>
+</section>
+<section style="flex: 1 1 320px; background: #FFFFFF; border: 2px solid #1F3A5F; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600">Your order</h3>
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px"><span>{{l.label}}</span><span style="font-weight: 600">{{l.amount}}</span></div>
+</sc-for>
+<sc-if value="{{cartEmpty}}" hint-placeholder-val="{{false}}"><div style="color: #5A6478; font-size: 14px">No journals selected yet.</div></sc-if>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid #E2E5EB"><span style="font-weight: 600">Total</span><span style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600">{{total}}</span></div>
+<button type="button" onClick="{{goCheckout}}" style="min-height: 48px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; font-size: 16px; cursor: pointer; {{ctaStyle}}">Continue to details</button>
+</section>
+</div>
+</main>
+</sc-if>
+
+<!-- ================= CHECKOUT ================= -->
+<sc-if value="{{isCheckout}}" hint-placeholder-val="{{false}}">
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 36px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<button type="button" onClick="{{goShop}}" style="align-self: flex-start; min-height: 36px; padding: 0; border: 0; background: none; color: #1F4E8C; cursor: pointer; text-decoration: underline">← Back to journals</button>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">Register &amp; pay</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">1 · Subscriber details</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Name / Addressee *<input type="text" value="{{f.name}}" onChange="{{ff.name}}" autocomplete="name" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Organisation (optional)<input type="text" value="{{f.org}}" onChange="{{ff.org}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Address line 1 *<input type="text" value="{{f.addr1}}" onChange="{{ff.addr1}}" autocomplete="address-line1" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Address line 2<input type="text" value="{{f.addr2}}" onChange="{{ff.addr2}}" autocomplete="address-line2" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">City *<input type="text" value="{{f.city}}" onChange="{{ff.city}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">State<input type="text" value="{{f.state}}" onChange="{{ff.state}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Pincode *<input type="text" inputmode="numeric" value="{{f.pin}}" onChange="{{ff.pin}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Mobile *<input type="tel" value="{{f.mobile}}" onChange="{{ff.mobile}}" autocomplete="tel" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Email *<input type="email" value="{{f.email}}" onChange="{{ff.email}}" autocomplete="email" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">GSTIN (optional)<input type="text" value="{{f.gst}}" onChange="{{ff.gst}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+</div>
+</section>
+
+<section style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">2 · Payment</h2>
+<div role="radiogroup" aria-label="Payment method" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px">
+<sc-for list="{{methods}}" as="item" hint-placeholder-count="4">
+<button type="button" role="radio" aria-checked="{{item.checked}}" onClick="{{item.pick}}" style="min-height: 64px; padding: 10px; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; text-align: left; {{item.style}}">
+<span style="font-weight: 600">{{item.label}}</span><span style="font-size: 12px; color: #5A6478">{{item.sub}}</span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{mUpi}}" hint-placeholder-val="{{true}}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468; max-width: 360px">UPI ID<input type="text" value="{{f.upi}}" onChange="{{ff.upi}}" placeholder="name@bank" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+</sc-if>
+<sc-if value="{{mCard}}" hint-placeholder-val="{{false}}">
+<div style="display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Card number<input type="text" inputmode="numeric" autocomplete="cc-number" value="{{f.card}}" onChange="{{ff.card}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Expiry<input type="text" autocomplete="cc-exp" placeholder="MM/YY" value="{{f.exp}}" onChange="{{ff.exp}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">CVV<input type="password" inputmode="numeric" autocomplete="cc-csc" value="{{f.cvv}}" onChange="{{ff.cvv}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+</div>
+<div style="font-size: 12px; color: #5A6478">Prototype — card details are handled by the payment gateway, not stored by the portal.</div>
+</sc-if>
+<sc-if value="{{mNet}}" hint-placeholder-val="{{false}}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468; max-width: 360px">Your bank
+<select value="{{f.bank}}" onChange="{{ff.bank}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF"><option>State Bank of India</option><option>Indian Overseas Bank</option><option>Indian Bank</option><option>HDFC Bank</option><option>ICICI Bank</option><option>Canara Bank</option></select></label>
+</sc-if>
+<sc-if value="{{mOffline}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="padding: 14px 16px; border-radius: 10px; background: #F2F6FB; font-size: 14px; line-height: 1.6">Pay to <b>The Law Weekly</b> · A/c [ACCOUNT NO.] · IFSC [IFSC] · [BANK, BRANCH]. Cheques payable at Chennai.</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Cheque no. / UTR *<input type="text" value="{{f.ref}}" onChange="{{ff.ref}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Amount paid now
+<select value="{{f.partial}}" onChange="{{ff.partial}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF"><option>Full amount</option><option>Part payment</option></select></label>
+</div>
+<label style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1px dashed #8C97A8; border-radius: 10px; background: #F7F8FA; cursor: pointer; font-size: 14px"><span style="font-weight: 600">Upload proof</span><span style="color: #5A6478">{{proofName}}</span><input type="file" onChange="{{proofFile}}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+<div style="font-size: 13px; color: #5A6478">Your subscription activates once our team verifies the credit — usually within 2 working days.</div>
+</div>
+</sc-if>
+</section>
+</div>
+
+<aside style="flex: 1 1 320px; position: sticky; top: 16px; background: #FFFFFF; border: 2px solid #1F3A5F; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">Order summary</h2>
+<div style="font-size: 13px; color: #5A6478">{{ctype}} · {{delivery}} · {{tenureLabel}}</div>
+<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px"><span>{{l.label}}</span><span style="font-weight: 600">{{l.amount}}</span></div>
+</sc-for>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid #E2E5EB"><span style="font-weight: 600">Total</span><span style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600">{{total}}</span></div>
+<sc-if value="{{hasError}}" hint-placeholder-val="{{false}}"><div role="alert" style="padding: 10px 12px; border-radius: 8px; background: #F8E2E2; color: #A12A2A; font-size: 13px; font-weight: 500">{{error}}</div></sc-if>
+<button type="button" onClick="{{pay}}" style="min-height: 52px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; font-size: 16px; cursor: pointer">{{payLabel}}</button>
+<div style="font-size: 12px; color: #5A6478; line-height: 1.5">An invoice and receipt are emailed to you. Taxes, if applicable, appear on the invoice.</div>
+</aside>
+</div>
+</main>
+</sc-if>
+
+<!-- ================= CONFIRMATION ================= -->
+<sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+<main style="max-width: 760px; width: 100%; margin: 0 auto; padding: 56px 24px 72px; box-sizing: border-box">
+<section style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 16px; padding: 36px; display: flex; flex-direction: column; gap: 20px">
+<div style="width: 56px; height: 56px; border-radius: 28px; background: #E3F2EA; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E6B45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">{{doneTitle}}</h1>
+<p style="margin: 0; color: #4A5468; line-height: 1.6">{{doneText}}</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; padding: 20px; border-radius: 12px; background: #F6F5F1">
+<div><div style="font-size: 12px; color: #5A6478">Subscriber ID</div><div style="font-weight: 600; font-size: 17px">{{order.id}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Subscription status</div><div style="font-weight: 600; font-size: 17px">{{order.status}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Payment</div><div style="font-weight: 600; font-size: 17px">{{order.payStatus}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Amount</div><div style="font-weight: 600; font-size: 17px">{{order.total}}</div></div>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<button type="button" onClick="{{goAccount}}" style="min-height: 48px; padding: 0 20px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; cursor: pointer">Track my subscription</button>
+<button type="button" onClick="{{dlInvoice}}" style="min-height: 48px; padding: 0 20px; border: 1px solid #CDD2DA; border-radius: 10px; background: #FFFFFF; color: #172033; font-weight: 500; cursor: pointer">Download invoice</button>
+</div>
+</section>
+</main>
+</sc-if>
+
+<!-- ================= ACCOUNT ================= -->
+<sc-if value="{{isAccount}}" hint-placeholder-val="{{false}}">
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 36px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px">
+<div>
+<div style="font-size: 13px; color: #5A6478">Welcome back</div>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">{{accName}}</h1>
+</div>
+<div role="group" aria-label="Account section" style="display: flex; padding: 4px; gap: 4px; background: #E7E6E0; border-radius: 10px">
+<sc-for list="{{accTabs}}" as="item" hint-placeholder-count="3">
+<button type="button" onClick="{{item.pick}}" style="min-height: 40px; padding: 0 16px; border: 0; border-radius: 7px; cursor: pointer; font-weight: 600; font-size: 14px; {{item.style}}">{{item.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<sc-if value="{{tabSubs}}" hint-placeholder-val="{{true}}">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px">
+<sc-for list="{{mySubs}}" as="item" hint-placeholder-count="2">
+<article style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; align-items: flex-start">
+<div><div style="font-size: 12px; color: #5A6478">{{item.id}}</div><h2 style="margin: 2px 0 0; font-family: 'Newsreader', Georgia, serif; font-size: 22px; font-weight: 600">{{item.title}}</h2></div>
+<span style="display: inline-flex; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; {{item.badge}}">{{item.status}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 14px">
+<div><div style="font-size: 12px; color: #5A6478">Period</div><div>{{item.period}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Payment</div><div>{{item.pay}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Deliver to</div><div>{{item.to}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Amount</div><div style="font-weight: 600">{{item.amount}}</div></div>
+</div>
+<sc-if value="{{item.canRenew}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{item.renew}}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 0; border-radius: 8px; background: #8A4B00; color: #FFFFFF; font-weight: 600; cursor: pointer">Renew for 2026–27</button></sc-if>
+</article>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{tabIssues}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<sc-for list="{{myIssues}}" as="item" hint-placeholder-count="3">
+<article style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 20px 22px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center">
+<div style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 2px">
+<div style="font-weight: 600; font-size: 16px">{{item.issue}}</div>
+<div style="font-size: 13px; color: #5A6478">{{item.meta}}</div>
+</div>
+<ol aria-label="Delivery progress" style="flex: 2 1 380px; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{item.steps}}" as="s" hint-placeholder-count="3">
+<li style="display: flex; flex-direction: column; gap: 6px">
+<div style="height: 6px; border-radius: 3px; {{s.bar}}"></div>
+<span style="font-size: 13px; font-weight: 600; {{s.text}}">{{s.label}}</span>
+<span style="font-size: 12px; color: #5A6478">{{s.date}}</span>
+</li>
+</sc-for>
+</ol>
+<div style="flex: 0 0 auto">
+<sc-if value="{{item.canReport}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{item.report}}" style="min-height: 44px; padding: 0 14px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; cursor: pointer">Not received? Request re-send</button></sc-if>
+<sc-if value="{{item.reported}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; padding: 6px 12px; border-radius: 999px; background: #FBEFD9; color: #7A4A00; font-size: 13px; font-weight: 600">Re-send requested</span></sc-if>
+</div>
+</article>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{tabPay}}" hint-placeholder-val="{{false}}">
+<div style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; overflow-x: auto">
+<div style="min-width: 720px">
+<div style="display: grid; grid-template-columns: 150px 120px minmax(160px, 1fr) 120px 130px 120px; gap: 12px; padding: 12px 20px; font-size: 12px; font-weight: 600; color: #5A6478; text-transform: uppercase; letter-spacing: 0.04em; background: #F7F8FA; border-bottom: 1px solid #E2E5EB">
+<span>Document</span><span>Date</span><span>For</span><span style="text-align: right">Amount</span><span>Status</span><span style="text-align: right">Download</span>
+</div>
+<sc-for list="{{myPays}}" as="item" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 150px 120px minmax(160px, 1fr) 120px 130px 120px; gap: 12px; padding: 14px 20px; border-bottom: 1px solid #EEF0F3; align-items: center; font-size: 14px">
+<span style="font-weight: 600">{{item.no}}</span><span>{{item.date}}</span><span>{{item.for}}</span><span style="text-align: right; font-weight: 600">{{item.amount}}</span>
+<span><span style="display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; {{item.badge}}">{{item.status}}</span></span>
+<div style="text-align: right"><button type="button" onClick="{{item.dl}}" style="min-height: 36px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 6px; background: #FFFFFF; color: #172033; font-size: 13px; cursor: pointer">PDF</button></div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</main>
+</sc-if>
+
+<footer style="margin-top: auto; background: #13233A; color: #A9B4C6; font-size: 13px">
+<div style="max-width: 1200px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px">
+<span>© The Law Weekly · [Registered office address]</span>
+<span>Help: [PHONE] · [EMAIL]</span>
+</div>
+</footer>
+
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{false}}">
+<div role="status" style="position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: #13233A; color: #FFFFFF; padding: 12px 18px; border-radius: 10px; font-size: 14px; box-shadow: 0 8px 24px rgba(19,35,58,0.3); z-index: 30; max-width: calc(100% - 32px)">{{toast}}</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+const inr = (n) => '₹' + Math.round(Number(n) || 0).toLocaleString('en-IN');
+const J = [
+  { code: 'LW-C', name: 'The Law Weekly (Civil)', freq: 'Weekly', price: 2500, blurb: 'Civil law reports, published every week — the flagship journal for practitioners and courts.' },
+  { code: 'CRL', name: 'Criminal Law', freq: 'Monthly', price: 5000, blurb: 'Monthly reports of criminal law judgments for the Bar, courts and police departments.' },
+  { code: 'WLR', name: 'Writ Law', freq: 'Monthly', price: 4000, blurb: 'Monthly reports of writ jurisdiction judgments and constitutional remedies.' }
+];
+const BADGE = { green: 'background:#E3F2EA;color:#1E6B45', amber: 'background:#FBEFD9;color:#7A4A00', blue: 'background:#E3ECF8;color:#1F4E8C', grey: 'background:#EEF0F3;color:#4A5468' };
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: 'shop', ctype: 'Individual advocate', delivery: 'Outstation', tenure: 1,
+      cart: { 'LW-C': { on: true, n: 1 }, CRL: { on: false, n: 1 }, WLR: { on: false, n: 1 } },
+      method: 'UPI', f: { state: 'Tamil Nadu', bank: 'State Bank of India', partial: 'Full amount' }, error: '', toast: '',
+      accTab: 'subs', order: null, reported: {},
+      mySubs: [
+        { id: 'CRL-C 2231', title: 'Criminal Law × 1', period: 'Apr 2025 – Mar 2026', pay: 'Done · UPI', to: 'Tiruchirappalli', amount: 5000, status: 'Pending renewal', canRenew: true },
+        { id: 'CVL-N 1340', title: 'The Law Weekly (Civil) × 1', period: 'Apr 2026 – Mar 2027', pay: 'Done · Card', to: 'Tiruchirappalli', amount: 2500, status: 'Active' }
+      ],
+      myPays: [
+        { no: 'INV/26-27/0366', date: '30 Aug 2026', for: 'CRL-C 2231 renewal', amount: 5000, status: 'Paid' },
+        { no: 'RCPT/26-27/0981', date: '07 Oct 2026', for: 'CRL-C 2231 · UPI', amount: 5000, status: 'Receipt' },
+        { no: 'INV/26-27/0311', date: '02 Apr 2026', for: 'CVL-N 1340', amount: 2500, status: 'Paid' }
+      ]
+    };
+  }
+  flash(m) { this.setState({ toast: m }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 2800); }
+  componentWillUnmount() { clearTimeout(this._t); }
+  calc() {
+    const st = this.state;
+    const lines = [];
+    let total = 0;
+    J.forEach((j) => { const c = st.cart[j.code]; if (c.on) { const amt = j.price * c.n * st.tenure; total += amt; lines.push({ label: j.name + ' × ' + c.n + (st.tenure > 1 ? ' × ' + st.tenure + ' yrs' : ''), amount: inr(amt), code: j.code, n: c.n }); } });
+    return { lines, total };
+  }
+  pay() {
+    const st = this.state, f = st.f;
+    const { lines, total } = this.calc();
+    if (!lines.length) { this.setState({ error: 'Choose at least one journal.' }); return; }
+    if (!f.name || !f.addr1 || !f.city || !f.pin || !f.mobile || !f.email) { this.setState({ error: 'Please fill in name, address, city, pincode, mobile and email.' }); return; }
+    if (!/^\d{6}$/.test(String(f.pin).trim())) { this.setState({ error: 'Pincode should be 6 digits.' }); return; }
+    const offline = st.method === 'Cheque / NEFT';
+    if (offline && !f.ref) { this.setState({ error: 'Enter the cheque number or UTR so we can match your payment.' }); return; }
+    const local = st.delivery.indexOf('Local') === 0;
+    const first = lines[0].code;
+    const prefix = first === 'LW-C' ? (local ? 'CVL' : 'CVL-N') : first === 'CRL' ? (local ? 'CRL' : 'CRL-C') : (local ? 'WLR' : 'WLR-N');
+    const id = prefix + ' ' + (1400 + Math.floor(Math.random() * 500));
+    const payStatus = offline ? (f.partial === 'Part payment' ? 'Partial · verifying' : 'Verifying credit') : 'Done';
+    const order = { id, total: inr(total), status: 'New — awaiting approval', payStatus, offline };
+    const yrs = st.tenure;
+    const newSub = { id, title: lines.map((l) => l.code + ' × ' + l.n).join(' · '), period: 'Nov 2026 – Oct ' + (2026 + yrs), pay: payStatus + ' · ' + st.method, to: f.city, amount: total, status: 'New' };
+    const inv = { no: 'INV/26-27/0' + (420 + Math.floor(Math.random() * 60)), date: '08 Oct 2026', for: id, amount: total, status: offline ? 'Verification due' : 'Paid' };
+    this.setState({ order, view: 'done', error: '', mySubs: [newSub].concat(st.mySubs), myPays: [inv].concat(st.myPays) });
+  }
+  renderVals() {
+    const st = this.state;
+    const { lines, total } = this.calc();
+    const nav = (on) => (on ? 'background:#EEF2F8;color:#13233A' : 'background:transparent;color:#4A5468');
+    const seg = (on) => (on ? 'background:#FFFFFF;color:#13233A;box-shadow:0 1px 2px rgba(19,35,58,0.15)' : 'background:transparent;color:#4A5468');
+    const setCart = (code, patch) => { const cart = Object.assign({}, st.cart); cart[code] = Object.assign({}, cart[code], patch); this.setState({ cart }); };
+    const journals = J.map((j) => {
+      const c = st.cart[j.code];
+      return { code: j.code, name: j.name, freq: j.freq, blurb: j.blurb, price: inr(j.price), copiesText: c.n + (c.n > 1 ? ' copies' : ' copy'),
+        cardStyle: c.on ? 'border:2px solid #1F3A5F;box-shadow:0 6px 20px rgba(19,35,58,0.08)' : 'border:1px solid #E2E5EB',
+        btnStyle: c.on ? 'border:0;background:#1F3A5F;color:#FFFFFF' : 'border:1px solid #1F3A5F;background:#FFFFFF;color:#1F3A5F',
+        btnLabel: c.on ? 'Added ✓' : 'Add', pressed: c.on ? 'true' : 'false',
+        toggle: () => setCart(j.code, { on: !c.on }),
+        inc: () => setCart(j.code, { n: Math.min(99, c.n + 1), on: true }),
+        dec: () => setCart(j.code, { n: Math.max(1, c.n - 1) }) };
+    });
+    const tenures = [1, 2, 3].map((y) => ({ label: y + (y > 1 ? ' years' : ' year'), sub: y === 1 ? 'Apr – Mar cycle' : 'Fewer renewals', style: y === st.tenure ? 'border:2px solid #1F3A5F;background:#EEF2F8;color:#13233A' : 'border:1px solid #CDD2DA;background:#FFFFFF;color:#172033', pick: () => this.setState({ tenure: y }) }));
+    const M = [['UPI', 'Instant'], ['Card', 'Debit / credit'], ['Net Banking', 'All major banks'], ['Cheque / NEFT', 'Verified by our team']];
+    const methods = M.map(([m, s]) => ({ label: m, sub: s, checked: m === st.method ? 'true' : 'false', style: m === st.method ? 'border:2px solid #1F3A5F;background:#EEF2F8;color:#13233A' : 'border:1px solid #CDD2DA;background:#FFFFFF;color:#172033', pick: () => this.setState({ method: m, error: '' }) }));
+    const ffKeys = ['name', 'org', 'addr1', 'addr2', 'city', 'state', 'pin', 'mobile', 'email', 'gst', 'upi', 'card', 'exp', 'cvv', 'bank', 'ref', 'partial'];
+    const ff = {};
+    ffKeys.forEach((k) => { ff[k] = (e) => this.setState({ f: Object.assign({}, this.state.f, { [k]: e.target.value }) }); });
+    const offline = st.method === 'Cheque / NEFT';
+    const SB = { Active: BADGE.green, 'Pending renewal': BADGE.amber, New: BADGE.blue };
+    const mySubs = st.mySubs.map((s) => Object.assign({}, s, { amount: inr(s.amount), badge: SB[s.status] || BADGE.grey, canRenew: !!s.canRenew,
+      renew: () => { const cart = { 'LW-C': { on: false, n: 1 }, CRL: { on: true, n: 1 }, WLR: { on: false, n: 1 } }; this.setState({ cart, view: 'checkout', f: Object.assign({}, this.state.f, { name: 'Adv. K. Lakshmi Narayanan', addr1: '5/12, Bharathiyar Salai', addr2: 'Cantonment', city: 'Tiruchirappalli', pin: '620001', mobile: '94433 70215', email: 'kln.adv@gmail.com' }) }); } }));
+    const ISS = [
+      { key: 'a', issue: 'Criminal Law · Sep 2026', meta: 'CRL-C 2231 · 1 copy · India Post Speed Post EK 4410 2290 IN', stage: 3, dates: ['12 Sep', '15 Sep', '19 Sep'] },
+      { key: 'b', issue: 'The Law Weekly (Civil) · No. 40', meta: 'CVL-N 1340 · 1 copy · Professional Couriers 7781 0042', stage: 2, dates: ['30 Sep', '02 Oct', 'Expected 06 Oct'] },
+      { key: 'c', issue: 'The Law Weekly (Civil) · No. 41', meta: 'CVL-N 1340 · 1 copy · releases 09 Oct', stage: 1, dates: ['07 Oct', '—', '—'] }
+    ];
+    const myIssues = ISS.map((i) => {
+      const steps = ['Label printed', 'Dispatched', 'Delivered'].map((l, idx) => { const done = idx < i.stage; return { label: l, date: i.dates[idx], bar: done ? 'background:#1E6B45' : 'background:#E2E5EB', text: done ? 'color:#172033' : 'color:#8A93A3' }; });
+      const reported = !!st.reported[i.key];
+      return { issue: i.issue, meta: i.meta, steps, reported, canReport: i.stage >= 2 && !reported, report: () => { this.setState({ reported: Object.assign({}, st.reported, { [i.key]: true }) }); this.flash('Re-send request RS-1' + (19 + Object.keys(st.reported).length) + ' sent to the publisher'); } };
+    });
+    const PB = { Paid: BADGE.green, Receipt: BADGE.grey, 'Verification due': BADGE.blue };
+    const myPays = st.myPays.map((p) => Object.assign({}, p, { amount: inr(p.amount), badge: PB[p.status] || BADGE.grey, dl: () => this.flash(p.no + '.pdf downloaded') }));
+    const accTabs = [['subs', 'Subscriptions'], ['issues', 'Issue tracking'], ['pay', 'Invoices & payments']].map(([v, l]) => ({ label: l, style: seg(v === st.accTab), pick: () => this.setState({ accTab: v }) }));
+    const o = st.order || { id: '', total: '', status: '', payStatus: '', offline: false };
+    return {
+      isShop: st.view === 'shop', isCheckout: st.view === 'checkout', isDone: st.view === 'done', isAccount: st.view === 'account',
+      navShop: nav(st.view === 'shop'), navAccount: nav(st.view === 'account'),
+      goShop: () => this.setState({ view: 'shop' }), goAccount: () => this.setState({ view: 'account' }),
+      goCheckout: () => { if (!lines.length) { this.setState({ view: 'shop' }); this.flash('Add a journal to continue'); } else this.setState({ view: 'checkout', error: '' }); },
+      cartCount: lines.length,
+      ctype: st.ctype, setCtype: (e) => this.setState({ ctype: e.target.value }), delivery: st.delivery, setDelivery: (e) => this.setState({ delivery: e.target.value }),
+      journals, tenures, tenureLabel: st.tenure + (st.tenure > 1 ? ' years' : ' year'), lines, cartEmpty: !lines.length, total: inr(total),
+      ctaStyle: lines.length ? '' : 'opacity:0.5',
+      methods, mUpi: st.method === 'UPI', mCard: st.method === 'Card', mNet: st.method === 'Net Banking', mOffline: offline,
+      f: st.f, ff, proofName: st.f.proof || 'Cheque scan or NEFT advice (JPG / PDF)',
+      proofFile: (e) => { const file = e.target.files && e.target.files[0]; if (file) this.setState({ f: Object.assign({}, this.state.f, { proof: file.name }) }); },
+      error: st.error, hasError: !!st.error, pay: () => this.pay(), payLabel: offline ? 'Submit payment details' : 'Pay ' + inr(total),
+      order: o, doneTitle: o.offline ? 'Thank you — we’re verifying your payment' : 'Payment received. You’re subscribed.',
+      doneText: o.offline ? 'Your subscription is registered. It activates once the cheque or NEFT credit is verified by our accounts team; we’ll email you when it does.' : 'Your subscription is registered and goes to our team for approval. Your invoice and receipt are on their way by email, and you can track each issue from My subscriptions.',
+      dlInvoice: () => this.flash('Invoice downloaded'),
+      accName: 'Adv. K. Lakshmi Narayanan', accTabs, tabSubs: st.accTab === 'subs', tabIssues: st.accTab === 'issues', tabPay: st.accTab === 'pay',
+      mySubs, myIssues, myPays,
+      toast: st.toast, hasToast: !!st.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
