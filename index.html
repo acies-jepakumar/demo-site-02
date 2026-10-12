@@ -28,26 +28,25 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <span style="display: block; font-size: 12px; color: #5A6478; letter-spacing: 0.08em; text-transform: uppercase">Law reports · since [YEAR]</span>
 </button>
 <nav aria-label="Site" style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap">
-<button type="button" onClick="{{goShop}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navShop}}">Journals &amp; plans</button>
-<button type="button" onClick="{{goAccount}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navAccount}}">My subscriptions</button>
+<button type="button" onClick="{{goShop}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navShop}}">Subscribe</button>
+<button type="button" onClick="{{goIssues}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navIssues}}">Browse issues</button>
+<button type="button" onClick="{{goAccount}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; font-weight: 500; {{navAccount}}">My account</button>
 <button type="button" onClick="{{goCheckout}}" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; cursor: pointer">Cart · {{cartCount}}</button>
 </nav>
 </div>
 </header>
 
-<!-- ================= SHOP ================= -->
+<!-- ================= SUBSCRIBE ================= -->
 <sc-if value="{{isShop}}" hint-placeholder-val="{{true}}">
 <section style="background: #13233A; color: #FFFFFF">
 <div style="max-width: 1200px; margin: 0 auto; padding: 56px 24px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-end; justify-content: space-between">
 <div style="flex: 1 1 520px; max-width: 680px; display: flex; flex-direction: column; gap: 16px">
 <div style="font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #E9B44C; font-weight: 600">Subscriptions 2026–27 now open</div>
 <h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 52px; line-height: 1.05; font-weight: 600; letter-spacing: -0.015em">Reported judgments, delivered to your chambers.</h1>
-<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #D3DAE5">Subscribe to The Law Weekly (Civil), Criminal Law and Writ Law online. Pay by UPI, card, net banking or cheque, and track every issue to your door.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #D3DAE5">Subscribe for a year, or buy a single issue. Choose a printed copy, a PDF soft copy, or both — and track every issue to your door.</p>
 </div>
-<div style="display: flex; gap: 28px; flex-wrap: wrap">
-<div><div style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">3</div><div style="font-size: 13px; color: #A9B4C6">journals</div></div>
-<div><div style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">Weekly</div><div style="font-size: 13px; color: #A9B4C6">civil reports</div></div>
-<div><div style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">Monthly</div><div style="font-size: 13px; color: #A9B4C6">criminal &amp; writ</div></div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<button type="button" onClick="{{goIssues}}" style="min-height: 48px; padding: 0 20px; border: 1px solid #FFFFFF; border-radius: 10px; background: transparent; color: #FFFFFF; font-weight: 600; cursor: pointer">Buy a single issue →</button>
 </div>
 </div>
 </section>
@@ -55,8 +54,8 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <main style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 40px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between">
 <div>
-<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 600">Choose your journals</h2>
-<p style="margin: 6px 0 0; color: #5A6478">Select one or more, set the number of copies, then pick your plan.</p>
+<h2 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 32px; font-weight: 600">Annual subscriptions</h2>
+<p style="margin: 6px 0 0; color: #5A6478">All subscriptions run for 1 year. Pick the format and number of copies, then add to cart.</p>
 </div>
 <div style="display: flex; gap: 12px; flex-wrap: wrap">
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">I am subscribing as
@@ -70,51 +69,123 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 </div>
 </div>
 
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
 <sc-for list="{{journals}}" as="item" hint-placeholder-count="3">
-<article style="background: #FFFFFF; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 18px; {{item.cardStyle}}">
+<article style="background: #FFFFFF; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px; {{item.cardStyle}}">
 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
 <div style="display: flex; flex-direction: column; gap: 4px">
-<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8A4B00">{{item.freq}}</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8A4B00">{{item.freq}} · 1-year subscription</span>
 <h3 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 600; line-height: 1.15">{{item.name}}</h3>
 </div>
 <span style="padding: 4px 9px; border-radius: 6px; background: #EEF2F8; color: #1F3A5F; font-size: 12px; font-weight: 600">{{item.code}}</span>
 </div>
 <p style="margin: 0; color: #4A5468; line-height: 1.55">{{item.blurb}}</p>
-<div style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">{{item.price}}</span><span style="color: #5A6478">per copy / year</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; font-weight: 600; color: #4A5468">Format</span>
+<div role="radiogroup" aria-label="Format" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{item.fmts}}" as="o" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{o.checked}}" onClick="{{o.pick}}" style="min-height: 44px; padding: 4px 6px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; {{o.style}}"><span>{{o.label}}</span><span style="font-size: 11px; font-weight: 500; color: #5A6478">{{o.price}}</span></button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Newsreader', Georgia, serif; font-size: 34px; font-weight: 600">{{item.price}}</span><span style="color: #5A6478">{{item.priceNote}}</span></div>
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid #EEF0F3">
-<div style="display: flex; align-items: center; gap: 4px" role="group" aria-label="Copies">
+<sc-if value="{{item.hasCopies}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; align-items: center; gap: 4px" role="group" aria-label="Printed copies">
 <button type="button" onClick="{{item.dec}}" aria-label="Fewer copies" style="width: 44px; height: 44px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; font-size: 20px; cursor: pointer">−</button>
 <span style="min-width: 64px; text-align: center; font-weight: 600">{{item.copiesText}}</span>
 <button type="button" onClick="{{item.inc}}" aria-label="More copies" style="width: 44px; height: 44px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; color: #172033; font-size: 20px; cursor: pointer">+</button>
 </div>
-<button type="button" onClick="{{item.toggle}}" aria-pressed="{{item.pressed}}" style="min-height: 44px; padding: 0 18px; border-radius: 8px; cursor: pointer; font-weight: 600; {{item.btnStyle}}">{{item.btnLabel}}</button>
+</sc-if>
+<sc-if value="{{item.noCopies}}" hint-placeholder-val="{{false}}"><span style="font-size: 13px; color: #5A6478">PDF access for 1 reader</span></sc-if>
+<button type="button" onClick="{{item.add}}" style="min-height: 44px; padding: 0 18px; border-radius: 8px; cursor: pointer; font-weight: 600; {{item.btnStyle}}">{{item.btnLabel}}</button>
 </div>
 </article>
 </sc-for>
 </div>
 
-<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
-<section style="flex: 1 1 420px; background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
-<h3 style="margin: 0; font-size: 17px; font-weight: 600">Plan length</h3>
-<div role="group" aria-label="Plan length" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
-<sc-for list="{{tenures}}" as="item" hint-placeholder-count="3">
-<button type="button" onClick="{{item.pick}}" style="min-height: 64px; padding: 10px; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; {{item.style}}">
-<span style="font-weight: 600">{{item.label}}</span><span style="font-size: 12px; color: #5A6478">{{item.sub}}</span>
-</button>
+<aside style="flex: 1 1 320px; position: sticky; top: 16px; background: #FFFFFF; border: 2px solid #1F3A5F; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600">Your cart</h3>
+<sc-for list="{{cartLines}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid #EEF0F3">
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px"><span style="font-weight: 600">{{l.label}}</span><span style="font-weight: 600; white-space: nowrap">{{l.amount}}</span></div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; color: #5A6478">
+<select value="{{l.fmt}}" onChange="{{l.setFmt}}" aria-label="Format" style="height: 32px; padding: 0 6px; border: 1px solid #CDD2DA; border-radius: 6px; background: #FFFFFF; font-size: 13px"><option>Hard copy</option><option>Soft copy</option><option>Both</option></select>
+<span>{{l.meta}}</span>
+<button type="button" onClick="{{l.remove}}" style="margin-left: auto; min-height: 32px; padding: 0; border: 0; background: none; color: #A12A2A; font-size: 13px; text-decoration: underline; cursor: pointer">Remove</button>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{cartEmpty}}" hint-placeholder-val="{{false}}"><div style="color: #5A6478; font-size: 14px">Your cart is empty. Add a subscription or a single issue.</div></sc-if>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 4px"><span style="font-weight: 600">Total</span><span style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600">{{total}}</span></div>
+<button type="button" onClick="{{goCheckout}}" style="min-height: 48px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; font-size: 16px; cursor: pointer; {{ctaStyle}}">Continue to checkout</button>
+<p style="margin: 0; font-size: 12px; color: #5A6478; line-height: 1.5">Hard copies are posted to you. Soft copies (PDF) appear under My account › Downloads. Judges' and court complimentary copies are allotted by the publisher and not sold online.</p>
+</aside>
+</div>
+</main>
+</sc-if>
+
+<!-- ================= BROWSE ISSUES ================= -->
+<sc-if value="{{isIssues}}" hint-placeholder-val="{{false}}">
+<main style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 36px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
+<div>
+<h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">Browse issues</h1>
+<p style="margin: 6px 0 0; color: #5A6478">Every issue of all three journals. Buy just the issue you need — printed, PDF, or both.</p>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end">
+<div role="group" aria-label="Journal" style="display: flex; padding: 4px; gap: 4px; background: #E7E6E0; border-radius: 10px; flex-wrap: wrap">
+<sc-for list="{{issueTabs}}" as="item" hint-placeholder-count="4">
+<button type="button" onClick="{{item.pick}}" style="min-height: 40px; padding: 0 14px; border: 0; border-radius: 7px; cursor: pointer; font-weight: 600; font-size: 14px; {{item.style}}">{{item.label}}</button>
 </sc-for>
 </div>
-<p style="margin: 0; font-size: 13px; color: #5A6478; line-height: 1.5">Judges' and court complimentary copies are allotted by the publisher and are not sold online. Agents: your commission is applied on the invoice after approval.</p>
-</section>
-<section style="flex: 1 1 320px; background: #FFFFFF; border: 2px solid #1F3A5F; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
-<h3 style="margin: 0; font-size: 17px; font-weight: 600">Your order</h3>
-<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px"><span>{{l.label}}</span><span style="font-weight: 600">{{l.amount}}</span></div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Search
+<input type="search" value="{{issueQ}}" onChange="{{setIssueQ}}" placeholder="Issue no., month, volume…" style="height: 44px; width: 220px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; box-sizing: border-box"></label>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 640px; min-width: 0; background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; overflow-x: auto">
+<div style="min-width: 820px">
+<div style="display: grid; grid-template-columns: minmax(170px, 1.6fr) 80px 110px 70px 70px 150px 90px 120px; gap: 12px; padding: 12px 20px; font-size: 12px; font-weight: 600; color: #5A6478; text-transform: uppercase; letter-spacing: 0.04em; background: #F7F8FA; border-bottom: 1px solid #E2E5EB">
+<span>Issue</span><span>Volume</span><span>Release</span><span style="text-align: right">Pages</span><span style="text-align: right">Cases</span><span>Format</span><span style="text-align: right">Price</span><span style="text-align: right"></span>
+</div>
+<sc-for list="{{issueRows}}" as="item" hint-placeholder-count="8">
+<div style="display: grid; grid-template-columns: minmax(170px, 1.6fr) 80px 110px 70px 70px 150px 90px 120px; gap: 12px; padding: 14px 20px; border-bottom: 1px solid #EEF0F3; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-weight: 600">{{item.title}}</span>
+<span style="font-size: 12px; color: #5A6478">{{item.jname}}</span>
+</div>
+<span>{{item.vol}}</span>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">{{item.release}}</span><sc-if value="{{item.isPre}}" hint-placeholder-val="{{false}}"><span style="align-self: flex-start; padding: 1px 7px; border-radius: 999px; background: #E3ECF8; color: #1F4E8C; font-size: 11px; font-weight: 600">Pre-order</span></sc-if></div>
+<span style="text-align: right">{{item.pages}}</span>
+<span style="text-align: right">{{item.cases}}</span>
+<select value="{{item.fmt}}" onChange="{{item.setFmt}}" aria-label="Format" style="height: 38px; padding: 0 8px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF; font-size: 14px"><option>Hard copy</option><option>Soft copy</option><option>Both</option></select>
+<span style="text-align: right; font-weight: 600">{{item.price}}</span>
+<div style="text-align: right"><button type="button" onClick="{{item.add}}" style="min-height: 40px; padding: 0 14px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 14px; {{item.btnStyle}}">{{item.btnLabel}}</button></div>
+</div>
 </sc-for>
-<sc-if value="{{cartEmpty}}" hint-placeholder-val="{{false}}"><div style="color: #5A6478; font-size: 14px">No journals selected yet.</div></sc-if>
-<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid #E2E5EB"><span style="font-weight: 600">Total</span><span style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600">{{total}}</span></div>
-<button type="button" onClick="{{goCheckout}}" style="min-height: 48px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; font-size: 16px; cursor: pointer; {{ctaStyle}}">Continue to details</button>
-</section>
+<div style="padding: 12px 20px; font-size: 13px; color: #5A6478">{{issueCount}}</div>
+</div>
+</div>
+
+<aside style="flex: 1 1 300px; position: sticky; top: 16px; background: #FFFFFF; border: 2px solid #1F3A5F; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+<h3 style="margin: 0; font-size: 17px; font-weight: 600">Your cart</h3>
+<sc-for list="{{cartLines}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid #EEF0F3">
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 14px"><span style="font-weight: 600">{{l.label}}</span><span style="font-weight: 600; white-space: nowrap">{{l.amount}}</span></div>
+<div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; color: #5A6478">
+<select value="{{l.fmt}}" onChange="{{l.setFmt}}" aria-label="Format" style="height: 32px; padding: 0 6px; border: 1px solid #CDD2DA; border-radius: 6px; background: #FFFFFF; font-size: 13px"><option>Hard copy</option><option>Soft copy</option><option>Both</option></select>
+<span>{{l.meta}}</span>
+<button type="button" onClick="{{l.remove}}" style="margin-left: auto; min-height: 32px; padding: 0; border: 0; background: none; color: #A12A2A; font-size: 13px; text-decoration: underline; cursor: pointer">Remove</button>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{cartEmpty}}" hint-placeholder-val="{{false}}"><div style="color: #5A6478; font-size: 14px">Your cart is empty.</div></sc-if>
+<div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 4px"><span style="font-weight: 600">Total</span><span style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600">{{total}}</span></div>
+<button type="button" onClick="{{goCheckout}}" style="min-height: 48px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; font-size: 16px; cursor: pointer; {{ctaStyle}}">Continue to checkout</button>
+</aside>
 </div>
 </main>
 </sc-if>
@@ -123,23 +194,24 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <sc-if value="{{isCheckout}}" hint-placeholder-val="{{false}}">
 <main style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 36px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 6px">
-<button type="button" onClick="{{goShop}}" style="align-self: flex-start; min-height: 36px; padding: 0; border: 0; background: none; color: #1F4E8C; cursor: pointer; text-decoration: underline">← Back to journals</button>
+<button type="button" onClick="{{goShop}}" style="align-self: flex-start; min-height: 36px; padding: 0; border: 0; background: none; color: #1F4E8C; cursor: pointer; text-decoration: underline">← Continue shopping</button>
 <h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">Register &amp; pay</h1>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
 <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
 <section style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
-<h2 style="margin: 0; font-size: 18px; font-weight: 600">1 · Subscriber details</h2>
+<h2 style="margin: 0; font-size: 18px; font-weight: 600">1 · Your details</h2>
+<sc-if value="{{softOnly}}" hint-placeholder-val="{{false}}"><div style="padding: 10px 12px; border-radius: 8px; background: #F2F6FB; font-size: 13px; color: #13233A">Your cart has soft copies only — a postal address is optional.</div></sc-if>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Name / Addressee *<input type="text" value="{{f.name}}" onChange="{{ff.name}}" autocomplete="name" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Organisation (optional)<input type="text" value="{{f.org}}" onChange="{{ff.org}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Address line 1 *<input type="text" value="{{f.addr1}}" onChange="{{ff.addr1}}" autocomplete="address-line1" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Name / Organisation *<input type="text" value="{{f.name}}" onChange="{{ff.name}}" autocomplete="name" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Designation (optional)<input type="text" value="{{f.org}}" onChange="{{ff.org}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Address line 1 {{reqMark}}<input type="text" value="{{f.addr1}}" onChange="{{ff.addr1}}" autocomplete="address-line1" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Address line 2<input type="text" value="{{f.addr2}}" onChange="{{ff.addr2}}" autocomplete="address-line2" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">City *<input type="text" value="{{f.city}}" onChange="{{ff.city}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">City {{reqMark}}<input type="text" value="{{f.city}}" onChange="{{ff.city}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">State<input type="text" value="{{f.state}}" onChange="{{ff.state}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Pincode *<input type="text" inputmode="numeric" value="{{f.pin}}" onChange="{{ff.pin}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Pincode {{reqMark}}<input type="text" inputmode="numeric" value="{{f.pin}}" onChange="{{ff.pin}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Mobile *<input type="tel" value="{{f.mobile}}" onChange="{{ff.mobile}}" autocomplete="tel" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
-<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Email *<input type="email" value="{{f.email}}" onChange="{{ff.email}}" autocomplete="email" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Email * (soft copies are linked to it)<input type="email" value="{{f.email}}" onChange="{{ff.email}}" autocomplete="email" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">GSTIN (optional)<input type="text" value="{{f.gst}}" onChange="{{ff.gst}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; box-sizing: border-box"></label>
 </div>
 </section>
@@ -176,8 +248,8 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #4A5468">Amount paid now
 <select value="{{f.partial}}" onChange="{{ff.partial}}" style="height: 44px; padding: 0 12px; border: 1px solid #CDD2DA; border-radius: 8px; background: #FFFFFF"><option>Full amount</option><option>Part payment</option></select></label>
 </div>
-<label style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1px dashed #8C97A8; border-radius: 10px; background: #F7F8FA; cursor: pointer; font-size: 14px"><span style="font-weight: 600">Upload proof</span><span style="color: #5A6478">{{proofName}}</span><input type="file" onChange="{{proofFile}}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
-<div style="font-size: 13px; color: #5A6478">Your subscription activates once our team verifies the credit — usually within 2 working days.</div>
+<label style="position: relative; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border: 1px dashed #8C97A8; border-radius: 10px; background: #F7F8FA; cursor: pointer; font-size: 14px"><span style="font-weight: 600">Upload proof</span><span style="color: #5A6478">{{proofName}}</span><input type="file" onChange="{{proofFile}}" style="position: absolute; width: 1px; height: 1px; opacity: 0"></label>
+<div style="font-size: 13px; color: #5A6478">Your order is confirmed once our team sees the credit — usually within 2 working days.</div>
 </div>
 </sc-if>
 </section>
@@ -185,9 +257,9 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 
 <aside style="flex: 1 1 320px; position: sticky; top: 16px; background: #FFFFFF; border: 2px solid #1F3A5F; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
 <h2 style="margin: 0; font-size: 18px; font-weight: 600">Order summary</h2>
-<div style="font-size: 13px; color: #5A6478">{{ctype}} · {{delivery}} · {{tenureLabel}}</div>
-<sc-for list="{{lines}}" as="l" hint-placeholder-count="2">
-<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px"><span>{{l.label}}</span><span style="font-weight: 600">{{l.amount}}</span></div>
+<div style="font-size: 13px; color: #5A6478">{{ctype}} · {{delivery}}</div>
+<sc-for list="{{cartLines}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px"><div style="display: flex; flex-direction: column"><span>{{l.label}}</span><span style="font-size: 12px; color: #5A6478">{{l.fmt}} · {{l.meta}}</span></div><span style="font-weight: 600; white-space: nowrap">{{l.amount}}</span></div>
 </sc-for>
 <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid #E2E5EB"><span style="font-weight: 600">Total</span><span style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600">{{total}}</span></div>
 <sc-if value="{{hasError}}" hint-placeholder-val="{{false}}"><div role="alert" style="padding: 10px 12px; border-radius: 8px; background: #F8E2E2; color: #A12A2A; font-size: 13px; font-weight: 500">{{error}}</div></sc-if>
@@ -205,14 +277,14 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <div style="width: 56px; height: 56px; border-radius: 28px; background: #E3F2EA; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1E6B45" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
 <h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">{{doneTitle}}</h1>
 <p style="margin: 0; color: #4A5468; line-height: 1.6">{{doneText}}</p>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; padding: 20px; border-radius: 12px; background: #F6F5F1">
-<div><div style="font-size: 12px; color: #5A6478">Subscriber ID</div><div style="font-weight: 600; font-size: 17px">{{order.id}}</div></div>
-<div><div style="font-size: 12px; color: #5A6478">Subscription status</div><div style="font-weight: 600; font-size: 17px">{{order.status}}</div></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; padding: 20px; border-radius: 12px; background: #F6F5F1">
+<div><div style="font-size: 12px; color: #5A6478">Order</div><div style="font-weight: 600; font-size: 17px">{{order.id}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Items</div><div style="font-weight: 600; font-size: 17px">{{order.items}}</div></div>
 <div><div style="font-size: 12px; color: #5A6478">Payment</div><div style="font-weight: 600; font-size: 17px">{{order.payStatus}}</div></div>
 <div><div style="font-size: 12px; color: #5A6478">Amount</div><div style="font-weight: 600; font-size: 17px">{{order.total}}</div></div>
 </div>
 <div style="display: flex; gap: 10px; flex-wrap: wrap">
-<button type="button" onClick="{{goAccount}}" style="min-height: 48px; padding: 0 20px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; cursor: pointer">Track my subscription</button>
+<button type="button" onClick="{{goAccount}}" style="min-height: 48px; padding: 0 20px; border: 0; border-radius: 10px; background: #1F3A5F; color: #FFFFFF; font-weight: 600; cursor: pointer">Go to my account</button>
 <button type="button" onClick="{{dlInvoice}}" style="min-height: 48px; padding: 0 20px; border: 1px solid #CDD2DA; border-radius: 10px; background: #FFFFFF; color: #172033; font-weight: 500; cursor: pointer">Download invoice</button>
 </div>
 </section>
@@ -227,8 +299,8 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <div style="font-size: 13px; color: #5A6478">Welcome back</div>
 <h1 style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 36px; font-weight: 600">{{accName}}</h1>
 </div>
-<div role="group" aria-label="Account section" style="display: flex; padding: 4px; gap: 4px; background: #E7E6E0; border-radius: 10px">
-<sc-for list="{{accTabs}}" as="item" hint-placeholder-count="3">
+<div role="group" aria-label="Account section" style="display: flex; padding: 4px; gap: 4px; background: #E7E6E0; border-radius: 10px; flex-wrap: wrap">
+<sc-for list="{{accTabs}}" as="item" hint-placeholder-count="4">
 <button type="button" onClick="{{item.pick}}" style="min-height: 40px; padding: 0 16px; border: 0; border-radius: 7px; cursor: pointer; font-weight: 600; font-size: 14px; {{item.style}}">{{item.label}}</button>
 </sc-for>
 </div>
@@ -244,8 +316,8 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 </div>
 <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 14px">
 <div><div style="font-size: 12px; color: #5A6478">Period</div><div>{{item.period}}</div></div>
+<div><div style="font-size: 12px; color: #5A6478">Format</div><div>{{item.fmt}}</div></div>
 <div><div style="font-size: 12px; color: #5A6478">Payment</div><div>{{item.pay}}</div></div>
-<div><div style="font-size: 12px; color: #5A6478">Deliver to</div><div>{{item.to}}</div></div>
 <div><div style="font-size: 12px; color: #5A6478">Amount</div><div style="font-weight: 600">{{item.amount}}</div></div>
 </div>
 <sc-if value="{{item.canRenew}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{item.renew}}" style="align-self: flex-start; min-height: 44px; padding: 0 18px; border: 0; border-radius: 8px; background: #8A4B00; color: #FFFFFF; font-weight: 600; cursor: pointer">Renew for 2026–27</button></sc-if>
@@ -277,6 +349,28 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 </div>
 </article>
 </sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{tabDownloads}}" hint-placeholder-val="{{false}}">
+<div style="background: #FFFFFF; border: 1px solid #E2E5EB; border-radius: 14px; overflow-x: auto">
+<div style="min-width: 720px">
+<div style="display: grid; grid-template-columns: minmax(200px, 1.6fr) 130px 120px 150px 140px; gap: 12px; padding: 12px 20px; font-size: 12px; font-weight: 600; color: #5A6478; text-transform: uppercase; letter-spacing: 0.04em; background: #F7F8FA; border-bottom: 1px solid #E2E5EB">
+<span>Issue</span><span>Format</span><span>Purchased</span><span>Status</span><span style="text-align: right">Soft copy</span>
+</div>
+<sc-for list="{{myBuys}}" as="item" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: minmax(200px, 1.6fr) 130px 120px 150px 140px; gap: 12px; padding: 14px 20px; border-bottom: 1px solid #EEF0F3; align-items: center; font-size: 14px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">{{item.issue}}</span><span style="font-size: 12px; color: #5A6478">{{item.source}}</span></div>
+<span>{{item.fmt}}</span><span>{{item.date}}</span>
+<span><span style="display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; {{item.badge}}">{{item.status}}</span></span>
+<div style="text-align: right">
+<sc-if value="{{item.hasPdf}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{item.dl}}" style="min-height: 36px; padding: 0 12px; border: 0; border-radius: 6px; background: #1F3A5F; color: #FFFFFF; font-size: 13px; font-weight: 600; cursor: pointer">Download PDF</button></sc-if>
+<sc-if value="{{item.noPdf}}" hint-placeholder-val="{{false}}"><span style="font-size: 13px; color: #8A93A3">—</span></sc-if>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{noBuys}}" hint-placeholder-val="{{false}}"><div style="padding: 28px 20px; text-align: center; color: #5A6478">No single issues or soft copies yet.</div></sc-if>
+</div>
 </div>
 </sc-if>
 
@@ -314,84 +408,159 @@ a{color:#1F4E8C}a:hover{color:#13233A}
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
 const inr = (n) => '₹' + Math.round(Number(n) || 0).toLocaleString('en-IN');
 const J = [
-  { code: 'LW-C', name: 'The Law Weekly (Civil)', freq: 'Weekly', price: 2500, blurb: 'Civil law reports, published every week — the flagship journal for practitioners and courts.' },
-  { code: 'CRL', name: 'Criminal Law', freq: 'Monthly', price: 5000, blurb: 'Monthly reports of criminal law judgments for the Bar, courts and police departments.' },
-  { code: 'WLR', name: 'Writ Law', freq: 'Monthly', price: 4000, blurb: 'Monthly reports of writ jurisdiction judgments and constitutional remedies.' }
+  { code: 'LW-C', name: 'The Law Weekly (Civil)', short: 'LW Civil', freq: 'Weekly', price: 2500, issuePrice: 75, blurb: 'Civil law reports, published every week — the flagship journal for practitioners and courts.' },
+  { code: 'CRL', name: 'Criminal Law', short: 'Criminal Law', freq: 'Monthly', price: 5000, issuePrice: 500, blurb: 'Monthly reports of criminal law judgments for the Bar, courts and police departments.' },
+  { code: 'WLR', name: 'Writ Law', short: 'Writ Law', freq: 'Monthly', price: 4000, issuePrice: 400, blurb: 'Monthly reports of writ jurisdiction judgments and constitutional remedies.' }
+];
+const JBY = {}; J.forEach((j) => { JBY[j.code] = j; });
+// Sample format pricing: soft copy 80%, both 120% of the printed price — set your real rates here
+const FMT = { 'Hard copy': 1, 'Soft copy': 0.8, Both: 1.2 };
+const FMTS = ['Hard copy', 'Soft copy', 'Both'];
+const priceOf = (base, fmt) => Math.round((base * FMT[fmt]) / 10) * 10;
+const ISSUES = [
+  { id: 'LW-C No. 41', j: 'LW-C', vol: '4', release: '09 Oct 2026', pages: 96, cases: 22, pre: false },
+  { id: 'LW-C No. 40', j: 'LW-C', vol: '4', release: '02 Oct 2026', pages: 104, cases: 25, pre: false },
+  { id: 'LW-C No. 39', j: 'LW-C', vol: '4', release: '25 Sep 2026', pages: 96, cases: 21, pre: false },
+  { id: 'LW-C No. 38', j: 'LW-C', vol: '4', release: '18 Sep 2026', pages: 112, cases: 27, pre: false },
+  { id: 'LW-C No. 37', j: 'LW-C', vol: '4', release: '11 Sep 2026', pages: 96, cases: 20, pre: false },
+  { id: 'LW-C No. 36', j: 'LW-C', vol: '3', release: '04 Sep 2026', pages: 100, cases: 23, pre: false },
+  { id: 'CRL Oct 2026', j: 'CRL', vol: '2', release: '15 Oct 2026', pages: 224, cases: 48, pre: true },
+  { id: 'CRL Sep 2026', j: 'CRL', vol: '2', release: '15 Sep 2026', pages: 208, cases: 44, pre: false },
+  { id: 'CRL Aug 2026', j: 'CRL', vol: '2', release: '15 Aug 2026', pages: 216, cases: 46, pre: false },
+  { id: 'CRL Jul 2026', j: 'CRL', vol: '2', release: '15 Jul 2026', pages: 200, cases: 41, pre: false },
+  { id: 'WLR Oct 2026', j: 'WLR', vol: '2', release: '20 Oct 2026', pages: 176, cases: 36, pre: true },
+  { id: 'WLR Sep 2026', j: 'WLR', vol: '2', release: '20 Sep 2026', pages: 168, cases: 33, pre: false },
+  { id: 'WLR Aug 2026', j: 'WLR', vol: '2', release: '20 Aug 2026', pages: 184, cases: 38, pre: false }
 ];
 const BADGE = { green: 'background:#E3F2EA;color:#1E6B45', amber: 'background:#FBEFD9;color:#7A4A00', blue: 'background:#E3ECF8;color:#1F4E8C', grey: 'background:#EEF0F3;color:#4A5468' };
 class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'shop', ctype: 'Individual advocate', delivery: 'Outstation', tenure: 1,
-      cart: { 'LW-C': { on: true, n: 1 }, CRL: { on: false, n: 1 }, WLR: { on: false, n: 1 } },
+      view: 'shop', ctype: 'Individual advocate', delivery: 'Outstation',
+      pick: { 'LW-C': { n: 1, fmt: 'Hard copy' }, CRL: { n: 1, fmt: 'Hard copy' }, WLR: { n: 1, fmt: 'Hard copy' } },
+      cart: [{ key: 'sub|LW-C', kind: 'sub', code: 'LW-C', n: 1, fmt: 'Hard copy' }],
+      issueJ: 'All', issueQ: '', issueFmt: {},
       method: 'UPI', f: { state: 'Tamil Nadu', bank: 'State Bank of India', partial: 'Full amount' }, error: '', toast: '',
       accTab: 'subs', order: null, reported: {},
       mySubs: [
-        { id: 'CRL-C 2231', title: 'Criminal Law × 1', period: 'Apr 2025 – Mar 2026', pay: 'Done · UPI', to: 'Tiruchirappalli', amount: 5000, status: 'Pending renewal', canRenew: true },
-        { id: 'CVL-N 1340', title: 'The Law Weekly (Civil) × 1', period: 'Apr 2026 – Mar 2027', pay: 'Done · Card', to: 'Tiruchirappalli', amount: 2500, status: 'Active' }
+        { id: 'CRL-C 2231', title: 'Criminal Law × 1', period: 'Apr 2025 – Mar 2026', fmt: 'Hard copy', pay: 'Done · UPI', amount: 5000, status: 'Pending renewal', canRenew: true },
+        { id: 'CVL-N 1340', title: 'The Law Weekly (Civil) × 1', period: 'Apr 2026 – Mar 2027', fmt: 'Both', pay: 'Done · Card', amount: 3000, status: 'Active' }
+      ],
+      myBuys: [
+        { issue: 'LW-C No. 40', source: 'Included in CVL-N 1340', fmt: 'Both', date: '02 Oct 2026', status: 'Download ready' },
+        { issue: 'WLR Aug 2026', source: 'Single issue', fmt: 'Soft copy', date: '24 Aug 2026', status: 'Download ready' }
       ],
       myPays: [
         { no: 'INV/26-27/0366', date: '30 Aug 2026', for: 'CRL-C 2231 renewal', amount: 5000, status: 'Paid' },
         { no: 'RCPT/26-27/0981', date: '07 Oct 2026', for: 'CRL-C 2231 · UPI', amount: 5000, status: 'Receipt' },
-        { no: 'INV/26-27/0311', date: '02 Apr 2026', for: 'CVL-N 1340', amount: 2500, status: 'Paid' }
+        { no: 'INV/26-27/0331', date: '24 Aug 2026', for: 'WLR Aug 2026 · soft copy', amount: 320, status: 'Paid' },
+        { no: 'INV/26-27/0311', date: '02 Apr 2026', for: 'CVL-N 1340', amount: 3000, status: 'Paid' }
       ]
     };
   }
-  flash(m) { this.setState({ toast: m }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 2800); }
+  flash(m) { this.setState({ toast: m }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 2600); }
   componentWillUnmount() { clearTimeout(this._t); }
-  calc() {
-    const st = this.state;
-    const lines = [];
-    let total = 0;
-    J.forEach((j) => { const c = st.cart[j.code]; if (c.on) { const amt = j.price * c.n * st.tenure; total += amt; lines.push({ label: j.name + ' × ' + c.n + (st.tenure > 1 ? ' × ' + st.tenure + ' yrs' : ''), amount: inr(amt), code: j.code, n: c.n }); } });
-    return { lines, total };
+  lineOf(c) {
+    const j = JBY[c.code];
+    const soft = c.fmt === 'Soft copy';
+    const n = soft ? 1 : c.n;
+    if (c.kind === 'sub') return { label: j.name + ' — 1 year', meta: soft ? 'PDF access' : n + (n > 1 ? ' copies' : ' copy'), amount: priceOf(j.price, c.fmt) * n };
+    return { label: c.issueId + ' — single issue', meta: soft ? 'PDF' : n + (n > 1 ? ' copies' : ' copy'), amount: priceOf(j.issuePrice, c.fmt) * n };
+  }
+  addToCart(item) {
+    const cart = this.state.cart.slice();
+    const i = cart.findIndex((c) => c.key === item.key);
+    if (i >= 0) cart[i] = Object.assign({}, cart[i], item.kind === 'issue' && cart[i].fmt === item.fmt ? { n: cart[i].n + 1 } : { n: item.n, fmt: item.fmt });
+    else cart.push(item);
+    this.setState({ cart });
   }
   pay() {
     const st = this.state, f = st.f;
-    const { lines, total } = this.calc();
-    if (!lines.length) { this.setState({ error: 'Choose at least one journal.' }); return; }
-    if (!f.name || !f.addr1 || !f.city || !f.pin || !f.mobile || !f.email) { this.setState({ error: 'Please fill in name, address, city, pincode, mobile and email.' }); return; }
-    if (!/^\d{6}$/.test(String(f.pin).trim())) { this.setState({ error: 'Pincode should be 6 digits.' }); return; }
+    if (!st.cart.length) { this.setState({ error: 'Your cart is empty.' }); return; }
+    const hasHard = st.cart.some((c) => c.fmt !== 'Soft copy');
+    if (!f.name || !f.mobile || !f.email) { this.setState({ error: 'Please fill in name, mobile and email.' }); return; }
+    if (hasHard && (!f.addr1 || !f.city || !f.pin)) { this.setState({ error: 'Hard copies need a postal address — address, city and pincode.' }); return; }
+    if (f.pin && !/^\d{6}$/.test(String(f.pin).trim())) { this.setState({ error: 'Pincode should be 6 digits.' }); return; }
     const offline = st.method === 'Cheque / NEFT';
     if (offline && !f.ref) { this.setState({ error: 'Enter the cheque number or UTR so we can match your payment.' }); return; }
+    const total = st.cart.reduce((a, c) => a + this.lineOf(c).amount, 0);
+    const payStatus = offline ? (f.partial === 'Part payment' ? 'Partial · verifying' : 'Verifying credit') : 'Paid';
     const local = st.delivery.indexOf('Local') === 0;
-    const first = lines[0].code;
-    const prefix = first === 'LW-C' ? (local ? 'CVL' : 'CVL-N') : first === 'CRL' ? (local ? 'CRL' : 'CRL-C') : (local ? 'WLR' : 'WLR-N');
-    const id = prefix + ' ' + (1400 + Math.floor(Math.random() * 500));
-    const payStatus = offline ? (f.partial === 'Part payment' ? 'Partial · verifying' : 'Verifying credit') : 'Done';
-    const order = { id, total: inr(total), status: 'New — awaiting approval', payStatus, offline };
-    const yrs = st.tenure;
-    const newSub = { id, title: lines.map((l) => l.code + ' × ' + l.n).join(' · '), period: 'Nov 2026 – Oct ' + (2026 + yrs), pay: payStatus + ' · ' + st.method, to: f.city, amount: total, status: 'New' };
-    const inv = { no: 'INV/26-27/0' + (420 + Math.floor(Math.random() * 60)), date: '08 Oct 2026', for: id, amount: total, status: offline ? 'Verification due' : 'Paid' };
-    this.setState({ order, view: 'done', error: '', mySubs: [newSub].concat(st.mySubs), myPays: [inv].concat(st.myPays) });
+    const newSubs = [], newBuys = [];
+    st.cart.forEach((c) => {
+      if (c.kind === 'sub') {
+        const pre = c.code === 'LW-C' ? (local ? 'CVL' : 'CVL-N') : c.code === 'CRL' ? (local ? 'CRL' : 'CRL-C') : (local ? 'WLR' : 'WLR-N');
+        newSubs.push({ id: pre + ' ' + (1400 + Math.floor(Math.random() * 500)), title: JBY[c.code].name + (c.fmt === 'Soft copy' ? '' : ' × ' + c.n), period: 'Nov 2026 – Oct 2027', fmt: c.fmt, pay: payStatus + ' · ' + st.method, amount: this.lineOf(c).amount, status: 'New' });
+      } else {
+        const iss = ISSUES.find((x) => x.id === c.issueId) || {};
+        const soft = c.fmt !== 'Hard copy';
+        newBuys.push({ issue: c.issueId, source: 'Single issue' + (c.fmt === 'Soft copy' ? '' : ' · ' + c.n + (c.n > 1 ? ' copies' : ' copy')), fmt: c.fmt, date: '09 Oct 2026', status: iss.pre ? 'Pre-ordered' : offline ? 'Awaiting payment' : soft ? 'Download ready' : 'Dispatching' });
+      }
+    });
+    const orderId = 'ORD-' + (8800 + Math.floor(Math.random() * 900));
+    const inv = { no: 'INV/26-27/0' + (420 + Math.floor(Math.random() * 60)), date: '09 Oct 2026', for: orderId + ' · ' + st.cart.length + ' item(s)', amount: total, status: offline ? 'Verification due' : 'Paid' };
+    this.setState({
+      order: { id: orderId, items: (newSubs.length ? newSubs.length + ' subscription' + (newSubs.length > 1 ? 's' : '') : '') + (newSubs.length && newBuys.length ? ' + ' : '') + (newBuys.length ? newBuys.length + ' issue' + (newBuys.length > 1 ? 's' : '') : ''), total: inr(total), payStatus, offline, hasSoft: st.cart.some((c) => c.fmt !== 'Hard copy') },
+      view: 'done', error: '', cart: [], mySubs: newSubs.concat(st.mySubs), myBuys: newBuys.concat(st.myBuys), myPays: [inv].concat(st.myPays)
+    });
   }
   renderVals() {
     const st = this.state;
-    const { lines, total } = this.calc();
     const nav = (on) => (on ? 'background:#EEF2F8;color:#13233A' : 'background:transparent;color:#4A5468');
     const seg = (on) => (on ? 'background:#FFFFFF;color:#13233A;box-shadow:0 1px 2px rgba(19,35,58,0.15)' : 'background:transparent;color:#4A5468');
-    const setCart = (code, patch) => { const cart = Object.assign({}, st.cart); cart[code] = Object.assign({}, cart[code], patch); this.setState({ cart }); };
+    const pickOn = 'border:2px solid #1F3A5F;background:#EEF2F8;color:#13233A';
+    const pickOff = 'border:1px solid #CDD2DA;background:#FFFFFF;color:#172033';
+    const setPick = (code, patch) => this.setState({ pick: Object.assign({}, this.state.pick, { [code]: Object.assign({}, this.state.pick[code], patch) }) });
+    const inCart = (key) => this.state.cart.find((c) => c.key === key);
+
     const journals = J.map((j) => {
-      const c = st.cart[j.code];
-      return { code: j.code, name: j.name, freq: j.freq, blurb: j.blurb, price: inr(j.price), copiesText: c.n + (c.n > 1 ? ' copies' : ' copy'),
-        cardStyle: c.on ? 'border:2px solid #1F3A5F;box-shadow:0 6px 20px rgba(19,35,58,0.08)' : 'border:1px solid #E2E5EB',
-        btnStyle: c.on ? 'border:0;background:#1F3A5F;color:#FFFFFF' : 'border:1px solid #1F3A5F;background:#FFFFFF;color:#1F3A5F',
-        btnLabel: c.on ? 'Added ✓' : 'Add', pressed: c.on ? 'true' : 'false',
-        toggle: () => setCart(j.code, { on: !c.on }),
-        inc: () => setCart(j.code, { n: Math.min(99, c.n + 1), on: true }),
-        dec: () => setCart(j.code, { n: Math.max(1, c.n - 1) }) };
+      const p = st.pick[j.code];
+      const key = 'sub|' + j.code;
+      const c = inCart(key);
+      const soft = p.fmt === 'Soft copy';
+      return { code: j.code, name: j.name, freq: j.freq, blurb: j.blurb,
+        fmts: FMTS.map((fm) => ({ label: fm, price: inr(priceOf(j.price, fm)), checked: fm === p.fmt ? 'true' : 'false', style: fm === p.fmt ? pickOn : pickOff, pick: () => setPick(j.code, { fmt: fm }) })),
+        price: inr(priceOf(j.price, p.fmt) * (soft ? 1 : p.n)), priceNote: soft ? 'for 1 year' : 'for ' + p.n + (p.n > 1 ? ' copies' : ' copy') + ' / year',
+        hasCopies: !soft, noCopies: soft, copiesText: p.n + (p.n > 1 ? ' copies' : ' copy'),
+        inc: () => setPick(j.code, { n: Math.min(99, p.n + 1) }), dec: () => setPick(j.code, { n: Math.max(1, p.n - 1) }),
+        cardStyle: c ? 'border:2px solid #1F3A5F;box-shadow:0 6px 20px rgba(19,35,58,0.08)' : 'border:1px solid #E2E5EB',
+        btnStyle: c ? 'border:1px solid #1F3A5F;background:#FFFFFF;color:#1F3A5F' : 'border:0;background:#1F3A5F;color:#FFFFFF',
+        btnLabel: c ? (c.fmt === p.fmt && (soft || c.n === p.n) ? 'In cart ✓' : 'Update cart') : 'Add to cart',
+        add: () => { this.addToCart({ key, kind: 'sub', code: j.code, n: p.n, fmt: p.fmt }); this.flash(j.name + ' (' + p.fmt + ') added to cart'); } };
     });
-    const tenures = [1, 2, 3].map((y) => ({ label: y + (y > 1 ? ' years' : ' year'), sub: y === 1 ? 'Apr – Mar cycle' : 'Fewer renewals', style: y === st.tenure ? 'border:2px solid #1F3A5F;background:#EEF2F8;color:#13233A' : 'border:1px solid #CDD2DA;background:#FFFFFF;color:#172033', pick: () => this.setState({ tenure: y }) }));
+
+    const cartLines = st.cart.map((c, idx) => {
+      const ln = this.lineOf(c);
+      return { label: ln.label, meta: ln.meta, amount: inr(ln.amount), fmt: c.fmt,
+        setFmt: (e) => { const cart = this.state.cart.slice(); cart[idx] = Object.assign({}, cart[idx], { fmt: e.target.value }); this.setState({ cart }); },
+        remove: () => { const cart = this.state.cart.slice(); cart.splice(idx, 1); this.setState({ cart }); } };
+    });
+    const total = st.cart.reduce((a, c) => a + this.lineOf(c).amount, 0);
+
+    const iq = st.issueQ.trim().toLowerCase();
+    const issueRows = ISSUES.filter((i) => (st.issueJ === 'All' || i.j === st.issueJ) && (!iq || (i.id + ' ' + i.release + ' vol ' + i.vol + ' ' + JBY[i.j].name).toLowerCase().indexOf(iq) >= 0)).map((i) => {
+      const fmt = st.issueFmt[i.id] || 'Hard copy';
+      const key = 'iss|' + i.id + '|' + fmt;
+      const c = inCart(key);
+      return { title: i.id, jname: JBY[i.j].name, vol: 'Vol. ' + i.vol, release: i.release, isPre: i.pre, pages: i.pages, cases: i.cases, fmt, price: inr(priceOf(JBY[i.j].issuePrice, fmt)),
+        setFmt: (e) => this.setState({ issueFmt: Object.assign({}, this.state.issueFmt, { [i.id]: e.target.value }) }),
+        btnStyle: c ? 'border:1px solid #1F3A5F;background:#EEF2F8;color:#13233A' : 'border:0;background:#1F3A5F;color:#FFFFFF',
+        btnLabel: c ? (fmt === 'Soft copy' ? 'In cart ✓' : 'Add another') : (i.pre ? 'Pre-order' : 'Add to cart'),
+        add: () => { if (c && fmt === 'Soft copy') return; this.addToCart({ key, kind: 'issue', code: i.j, issueId: i.id, n: 1, fmt }); this.flash(i.id + ' (' + fmt + ') added to cart'); } };
+    });
+    const issueTabs = [['All', 'All journals'], ['LW-C', 'LW Civil'], ['CRL', 'Criminal Law'], ['WLR', 'Writ Law']].map(([v, l]) => ({ label: l, style: seg(v === st.issueJ), pick: () => this.setState({ issueJ: v }) }));
+
     const M = [['UPI', 'Instant'], ['Card', 'Debit / credit'], ['Net Banking', 'All major banks'], ['Cheque / NEFT', 'Verified by our team']];
-    const methods = M.map(([m, s]) => ({ label: m, sub: s, checked: m === st.method ? 'true' : 'false', style: m === st.method ? 'border:2px solid #1F3A5F;background:#EEF2F8;color:#13233A' : 'border:1px solid #CDD2DA;background:#FFFFFF;color:#172033', pick: () => this.setState({ method: m, error: '' }) }));
-    const ffKeys = ['name', 'org', 'addr1', 'addr2', 'city', 'state', 'pin', 'mobile', 'email', 'gst', 'upi', 'card', 'exp', 'cvv', 'bank', 'ref', 'partial'];
+    const methods = M.map(([m, s]) => ({ label: m, sub: s, checked: m === st.method ? 'true' : 'false', style: m === st.method ? pickOn : pickOff, pick: () => this.setState({ method: m, error: '' }) }));
     const ff = {};
-    ffKeys.forEach((k) => { ff[k] = (e) => this.setState({ f: Object.assign({}, this.state.f, { [k]: e.target.value }) }); });
+    ['name', 'org', 'addr1', 'addr2', 'city', 'state', 'pin', 'mobile', 'email', 'gst', 'upi', 'card', 'exp', 'cvv', 'bank', 'ref', 'partial'].forEach((k) => { ff[k] = (e) => this.setState({ f: Object.assign({}, this.state.f, { [k]: e.target.value }) }); });
     const offline = st.method === 'Cheque / NEFT';
+    const hasHard = st.cart.some((c) => c.fmt !== 'Soft copy');
+
     const SB = { Active: BADGE.green, 'Pending renewal': BADGE.amber, New: BADGE.blue };
     const mySubs = st.mySubs.map((s) => Object.assign({}, s, { amount: inr(s.amount), badge: SB[s.status] || BADGE.grey, canRenew: !!s.canRenew,
-      renew: () => { const cart = { 'LW-C': { on: false, n: 1 }, CRL: { on: true, n: 1 }, WLR: { on: false, n: 1 } }; this.setState({ cart, view: 'checkout', f: Object.assign({}, this.state.f, { name: 'Adv. K. Lakshmi Narayanan', addr1: '5/12, Bharathiyar Salai', addr2: 'Cantonment', city: 'Tiruchirappalli', pin: '620001', mobile: '94433 70215', email: 'kln.adv@gmail.com' }) }); } }));
+      renew: () => { this.addToCart({ key: 'sub|CRL', kind: 'sub', code: 'CRL', n: 1, fmt: s.fmt }); this.setState({ view: 'checkout', f: Object.assign({}, this.state.f, { name: 'Adv. K. Lakshmi Narayanan', addr1: '5/12, Bharathiyar Salai', addr2: 'Cantonment', city: 'Tiruchirappalli', pin: '620001', mobile: '94433 70215', email: 'kln.adv@gmail.com' }) }); } }));
     const ISS = [
       { key: 'a', issue: 'Criminal Law · Sep 2026', meta: 'CRL-C 2231 · 1 copy · India Post Speed Post EK 4410 2290 IN', stage: 3, dates: ['12 Sep', '15 Sep', '19 Sep'] },
       { key: 'b', issue: 'The Law Weekly (Civil) · No. 40', meta: 'CVL-N 1340 · 1 copy · Professional Couriers 7781 0042', stage: 2, dates: ['30 Sep', '02 Oct', 'Expected 06 Oct'] },
@@ -400,30 +569,32 @@ class Component extends DCLogic {
     const myIssues = ISS.map((i) => {
       const steps = ['Label printed', 'Dispatched', 'Delivered'].map((l, idx) => { const done = idx < i.stage; return { label: l, date: i.dates[idx], bar: done ? 'background:#1E6B45' : 'background:#E2E5EB', text: done ? 'color:#172033' : 'color:#8A93A3' }; });
       const reported = !!st.reported[i.key];
-      return { issue: i.issue, meta: i.meta, steps, reported, canReport: i.stage >= 2 && !reported, report: () => { this.setState({ reported: Object.assign({}, st.reported, { [i.key]: true }) }); this.flash('Re-send request RS-1' + (19 + Object.keys(st.reported).length) + ' sent to the publisher'); } };
+      return { issue: i.issue, meta: i.meta, steps, reported, canReport: i.stage >= 2 && !reported, report: () => { this.setState({ reported: Object.assign({}, st.reported, { [i.key]: true }) }); this.flash('Re-send request sent to the publisher'); } };
     });
+    const BB = { 'Download ready': BADGE.green, Dispatching: BADGE.amber, 'Pre-ordered': BADGE.blue, 'Awaiting payment': BADGE.grey };
+    const myBuys = st.myBuys.map((b) => { const pdf = b.fmt !== 'Hard copy' && b.status === 'Download ready'; return Object.assign({}, b, { badge: BB[b.status] || BADGE.grey, hasPdf: pdf, noPdf: !pdf, dl: () => this.flash(b.issue.replace(/\W+/g, '_') + '.pdf downloaded') }); });
     const PB = { Paid: BADGE.green, Receipt: BADGE.grey, 'Verification due': BADGE.blue };
     const myPays = st.myPays.map((p) => Object.assign({}, p, { amount: inr(p.amount), badge: PB[p.status] || BADGE.grey, dl: () => this.flash(p.no + '.pdf downloaded') }));
-    const accTabs = [['subs', 'Subscriptions'], ['issues', 'Issue tracking'], ['pay', 'Invoices & payments']].map(([v, l]) => ({ label: l, style: seg(v === st.accTab), pick: () => this.setState({ accTab: v }) }));
-    const o = st.order || { id: '', total: '', status: '', payStatus: '', offline: false };
+    const accTabs = [['subs', 'Subscriptions'], ['issues', 'Issue tracking'], ['downloads', 'Single issues & downloads'], ['pay', 'Invoices & payments']].map(([v, l]) => ({ label: l, style: seg(v === st.accTab), pick: () => this.setState({ accTab: v }) }));
+    const o = st.order || { id: '', items: '', total: '', payStatus: '', offline: false, hasSoft: false };
     return {
-      isShop: st.view === 'shop', isCheckout: st.view === 'checkout', isDone: st.view === 'done', isAccount: st.view === 'account',
-      navShop: nav(st.view === 'shop'), navAccount: nav(st.view === 'account'),
-      goShop: () => this.setState({ view: 'shop' }), goAccount: () => this.setState({ view: 'account' }),
-      goCheckout: () => { if (!lines.length) { this.setState({ view: 'shop' }); this.flash('Add a journal to continue'); } else this.setState({ view: 'checkout', error: '' }); },
-      cartCount: lines.length,
+      isShop: st.view === 'shop', isIssues: st.view === 'issues', isCheckout: st.view === 'checkout', isDone: st.view === 'done', isAccount: st.view === 'account',
+      navShop: nav(st.view === 'shop'), navIssues: nav(st.view === 'issues'), navAccount: nav(st.view === 'account'),
+      goShop: () => this.setState({ view: 'shop' }), goIssues: () => this.setState({ view: 'issues' }), goAccount: () => this.setState({ view: 'account' }),
+      goCheckout: () => { if (!st.cart.length) this.flash('Your cart is empty'); else this.setState({ view: 'checkout', error: '' }); },
+      cartCount: st.cart.length, cartLines, cartEmpty: !st.cart.length, total: inr(total), ctaStyle: st.cart.length ? '' : 'opacity:0.5',
       ctype: st.ctype, setCtype: (e) => this.setState({ ctype: e.target.value }), delivery: st.delivery, setDelivery: (e) => this.setState({ delivery: e.target.value }),
-      journals, tenures, tenureLabel: st.tenure + (st.tenure > 1 ? ' years' : ' year'), lines, cartEmpty: !lines.length, total: inr(total),
-      ctaStyle: lines.length ? '' : 'opacity:0.5',
+      journals, issueRows, issueTabs, issueQ: st.issueQ, setIssueQ: (e) => this.setState({ issueQ: e.target.value }), issueCount: issueRows.length + ' issues · prices shown are per copy for the selected format',
       methods, mUpi: st.method === 'UPI', mCard: st.method === 'Card', mNet: st.method === 'Net Banking', mOffline: offline,
-      f: st.f, ff, proofName: st.f.proof || 'Cheque scan or NEFT advice (JPG / PDF)',
+      f: st.f, ff, softOnly: st.cart.length > 0 && !hasHard, reqMark: hasHard ? '*' : '(optional)',
+      proofName: st.f.proof || 'Cheque scan or NEFT advice (JPG / PDF)',
       proofFile: (e) => { const file = e.target.files && e.target.files[0]; if (file) this.setState({ f: Object.assign({}, this.state.f, { proof: file.name }) }); },
       error: st.error, hasError: !!st.error, pay: () => this.pay(), payLabel: offline ? 'Submit payment details' : 'Pay ' + inr(total),
-      order: o, doneTitle: o.offline ? 'Thank you — we’re verifying your payment' : 'Payment received. You’re subscribed.',
-      doneText: o.offline ? 'Your subscription is registered. It activates once the cheque or NEFT credit is verified by our accounts team; we’ll email you when it does.' : 'Your subscription is registered and goes to our team for approval. Your invoice and receipt are on their way by email, and you can track each issue from My subscriptions.',
+      order: o, doneTitle: o.offline ? 'Thank you — we’re verifying your payment' : 'Payment received. Thank you!',
+      doneText: o.offline ? 'Your order is registered and will be confirmed once our accounts team verifies the credit. We’ll email you when it does.' : 'Your invoice and receipt are on their way by email.' + (o.hasSoft ? ' Soft copies are ready under My account › Single issues & downloads.' : '') + ' Printed copies can be tracked under Issue tracking.',
       dlInvoice: () => this.flash('Invoice downloaded'),
-      accName: 'Adv. K. Lakshmi Narayanan', accTabs, tabSubs: st.accTab === 'subs', tabIssues: st.accTab === 'issues', tabPay: st.accTab === 'pay',
-      mySubs, myIssues, myPays,
+      accName: 'Adv. K. Lakshmi Narayanan', accTabs, tabSubs: st.accTab === 'subs', tabIssues: st.accTab === 'issues', tabDownloads: st.accTab === 'downloads', tabPay: st.accTab === 'pay',
+      mySubs, myIssues, myBuys, noBuys: !myBuys.length, myPays,
       toast: st.toast, hasToast: !!st.toast
     };
   }
